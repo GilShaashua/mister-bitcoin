@@ -10,8 +10,9 @@ export default {
         setContacts(state, { contacts }) {
             state.contacts = contacts
         },
-        removeContact(state, { updatedContacts }) {
-            state.contacts = [...updatedContacts]
+        removeContact(state, { contactId }) {
+            const idx = state.contacts.findIndex(contact => contact._id === contactId)
+            state.contacts.splice(idx, 1)
         }
     },
     actions: {
@@ -20,8 +21,8 @@ export default {
             commit({ type: 'setContacts', contacts })
         },
         async removeContact({ commit }, { contactId }) {
-            const updatedContacts = await contactService.deleteContact(contactId)
-            commit({ type: 'removeContact', updatedContacts })
+            await contactService.deleteContact(contactId)
+            commit({ type: 'removeContact', contactId })
         }
     },
     getters: {

@@ -38,7 +38,6 @@ export default {
         }
     },
     created() {
-        console.log(this.marketPriceHistory, this.avgBlockSize)
         if (this.avgBlockSize) this.calcAvgPerMonthBlockSize()
         if (this.marketPriceHistory) this.calcAvgPerMonthMarketPrice()
     },

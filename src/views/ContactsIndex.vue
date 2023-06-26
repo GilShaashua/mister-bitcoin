@@ -14,7 +14,7 @@ import { showSuccessMsg, showErrorMsg } from '@/services/eventBus.service.js'
 export default {
   data() {
     return {
-      filterBy: { term: '' },
+      filterBy: { txt: '' },
       marketPriceHistory: null,
       avgBlockSize: null,
     }
