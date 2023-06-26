@@ -1,0 +1,13 @@
+.filter-contacts-container {
+    background-color: $clr5;
+    padding-block: .5em;
+    margin-block-start: 1em;
+
+    form {
+        input {
+            padding-inline: .5em;
+            padding-block: .3em;
+            border: none;
+        }
+    }
+}

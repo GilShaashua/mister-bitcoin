@@ -1,0 +1,54 @@
+.home-container {
+    position: relative;
+    height: calc(100vh - 77.9062px - 44.7656px);
+    display: grid;
+    grid-template-rows: calc((100vh - 77.9062px - 44.7656px) - 40%) calc((100vh - 77.9062px - 44.7656px) - 60%);
+
+    .hero-container {
+        position: relative;
+        height: 100%;
+
+        .img-hero {
+            grid-row: 1;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 0;
+            color: $clr3;
+            width: 100%;
+            height: 100%;
+            background-color: #186bb8cc;
+            padding: 2em;
+
+            h1 {
+                margin-block-end: .4em;
+                font-size: em(34px);
+            }
+
+            p {
+                max-width: 60%;
+            }
+
+            button {
+                margin: 0;
+                margin-block-start: 2em;
+                font-size: em(20px);
+                padding-block: .5em;
+                padding-inline: 1em;
+            }
+        }
+
+    }
+
+    .info-container {
+        background-color: $clr2;
+        color: $clr3;
+        padding: 3em;
+
+        h2 {
+            margin-block-end: .8em;
+        }
+    }
+}

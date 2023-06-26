@@ -1,0 +1,29 @@
+.app-header {
+    background-color: $clr1;
+    padding-block: .7em;
+    color: $clr3;
+
+    .app-header-inner-container {
+
+        .logo {
+            h1 {
+                font-size: em(20px);
+            }
+        }
+
+        nav {
+            a {
+                color: $clr3;
+                font-size: em(14px);
+
+                &.router-link-active {
+                    text-decoration: underline;
+                }
+
+                &:not(:last-child) {
+                    margin-inline-end: .5em;
+                }
+            }
+        }
+    }
+}
