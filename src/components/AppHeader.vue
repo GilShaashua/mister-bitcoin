@@ -4,8 +4,8 @@
       <div class="logo">
         <h1>misterBitcoin</h1>
       </div>
-      <div class="user-details">
-        <h3>Hello {{ user.name }}</h3>
+      <div class="user-details" v-if="user">
+        <h3>Hello {{ user.username }}</h3>
         <p>Balance <span>{{ user.balance }}&#8383</span></p>
       </div>
       <div class="rate-exchange">
@@ -22,14 +22,15 @@
 </template>
 
 <script>
-import { userService } from '@/services/user.service.js'
 import { bitcoinService } from '@/services/bitcoin.service.js'
 export default {
   data() {
     return {
-      user: userService.getUser(),
       rate: null,
     }
+  },
+  computed: {
+    user() { return this.$store.getters.getUser }
   },
   async created() {
     this.rate = await bitcoinService.getRate()

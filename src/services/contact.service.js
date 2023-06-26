@@ -127,20 +127,7 @@ const contactsBackup = [
         "email": "lillyconner@renovize.com",
         "phone": "+1 (842) 587-3812"
     }
-];
-
-function sort(arr) {
-    return arr.sort((a, b) => {
-        if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
-            return -1;
-        }
-        if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
-            return 1;
-        }
-
-        return 0;
-    })
-}
+]
 
 async function getContacts(filterBy = null) {
     let contacts = await storageService.query(STORAGE_KEY)
@@ -165,31 +152,6 @@ function deleteContact(contactId) {
     return storageService.remove(STORAGE_KEY, contactId)
 }
 
-// function _updateContact(contact) {
-//     return new Promise((resolve, reject) => {
-//         const index = contacts.findIndex(c => contact._id === contact._id)
-//         if (index !== -1) {
-//             contacts[index] = contact
-//         }
-//         resolve(contact)
-//     })
-// }
-
-// function _addContact(contact) {
-//     console.log('contact', contact);
-//     return new Promise((resolve, reject) => {
-//         contact._id = utilService.makeId()
-//         contactsBackup.push(contact)
-//         console.log('contacts', contacts);
-//         resolve(contact)
-//     })
-// }
-
-// function saveContact(contact) {
-//     console.log('hi service');
-//     return contact._id ? _updateContact(contact) : _addContact(contact)
-// }
-
 function saveContact(contact) {
     if (contact._id) {
         return storageService.put(STORAGE_KEY, contact)
@@ -204,14 +166,4 @@ function getEmptyContact() {
         email: '',
         phone: ''
     }
-}
-
-function filter(term) {
-    console.log('term', term);
-    term = term.toLocaleLowerCase()
-    return contacts.filter(contact => {
-        return contact.name.toLocaleLowerCase().includes(term) ||
-            contact.phone.toLocaleLowerCase().includes(term) ||
-            contact.email.toLocaleLowerCase().includes(term)
-    })
 }

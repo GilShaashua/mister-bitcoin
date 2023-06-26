@@ -17,8 +17,8 @@
       </div>
     </section>
     <section v-if="rate" class="info-container full main-layout">
-      <div class="info-inner-container">
-        <h2>Hello {{ user.name }}</h2>
+      <div class="info-inner-container" v-if="user">
+        <h2>Hello {{ user.username }}</h2>
         <p>Your balance is <span>{{ user.balance }}&#8383</span></p>
         <p>Current rate is <span>{{ rate }}</span></p>
       </div>
@@ -33,12 +33,15 @@ import { bitcoinService } from '@/services/bitcoin.service.js'
 export default {
   data() {
     return {
-      user: userService.getUser(),
       rate: null,
     };
   },
+  computed: {
+    user() { return this.$store.getters.getUser }
+  },
   async created() {
-    this.rate = await bitcoinService.getRate();
+    this.rate = await bitcoinService.getRate()
+    if (!this.user) this.$router.push('/signup')
   },
   components: { RouterLink }
 }

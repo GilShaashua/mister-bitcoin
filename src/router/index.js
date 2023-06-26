@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import ContactsIndex from '../views/ContactsIndex.vue'
 import ContactDetails from '@/views/ContactDetails.vue'
 import ContactEdit from '@/views/ContactEdit.vue'
+import Signup from '@/views/Signup.vue'
 import Statistics from '@/views/Statistics.vue'
 
 const routerOptions = {
@@ -32,6 +33,11 @@ const routerOptions = {
       path: '/contacts/edit/:id?',
       name: 'edit',
       component: ContactEdit,
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: Signup,
     },
     {
       path: '/about',

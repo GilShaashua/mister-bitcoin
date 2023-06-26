@@ -30,7 +30,7 @@ export default {
     watch: {
         contactId() {
             this.loadContact()
-        }
+        },
     },
     methods: {
         async save() {
