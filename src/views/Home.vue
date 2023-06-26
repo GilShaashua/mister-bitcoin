@@ -17,10 +17,13 @@
       </div>
     </section>
     <section v-if="rate" class="info-container full main-layout">
-      <div class="info-inner-container" v-if="user">
-        <h2>Hello {{ user.username }}</h2>
-        <p>Your balance is <span>{{ user.balance }}&#8383</span></p>
-        <p>Current rate is <span>{{ rate }}</span></p>
+      <div class="info-inner-container flex" v-if="user">
+        <div class="basic-info">
+          <h2>Hello {{ user.username }}</h2>
+          <p>Your balance is <span>{{ user.balance }}&#8383</span></p>
+          <p>Current rate is <span>{{ rate }}</span></p>
+        </div>
+        <TransactionList :transactions="user.transactions" />
       </div>
     </section>
   </section>
@@ -28,7 +31,7 @@
 
 <script>
 import { RouterLink } from 'vue-router'
-import { userService } from '@/services/user.service.js'
+import TransactionList from '@/components/TransactionList.vue'
 import { bitcoinService } from '@/services/bitcoin.service.js'
 export default {
   data() {
@@ -43,8 +46,12 @@ export default {
     this.rate = await bitcoinService.getRate()
     if (!this.user) this.$router.push('/signup')
   },
-  components: { RouterLink }
+  components: { RouterLink, TransactionList }
 }
 </script>
 
-<style></style>
+<style>
+.info-inner-container {
+  column-gap: 10em;
+}
+</style>

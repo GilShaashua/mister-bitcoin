@@ -37,6 +37,11 @@
                 font-size: em(20px);
                 padding-block: .5em;
                 padding-inline: 1em;
+                background-color: $clr2;
+
+                &:hover {
+                    background-color: #252525;
+                }
             }
         }
 

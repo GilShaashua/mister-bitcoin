@@ -4,6 +4,7 @@
         <h3>{{ contact.name }}</h3>
         <p>{{ contact.email }}</p>
         <p>{{ contact.phone }}</p>
+        <TransferFunds :contactId="contact._id" :contactName="contact.name" />
         <RouterLink :to="`/contacts/edit/${contact._id}`">
             <button>Edit</button>
         </RouterLink>
@@ -15,6 +16,7 @@
     
 <script>
 import { contactService } from '../services/contact.service.js';
+import TransferFunds from '@/components/TransferFunds.vue'
 
 export default {
     props: {
@@ -34,6 +36,7 @@ export default {
         this.imageUrl = `https://robohash.org/${this.contact.name}.png?set=set5`
     },
     components: {
+        TransferFunds,
     }
 }
 </script>

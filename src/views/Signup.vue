@@ -1,5 +1,5 @@
 <template>
-    <section class="signup-container">
+    <section class="signup-container flex column align-center">
         <h1>Sign up</h1>
         <p>And get 100 coins for free</p>
         <form @submit.prevent="createUser">

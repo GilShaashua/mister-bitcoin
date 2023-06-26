@@ -8,11 +8,14 @@ _createUserDB()
 
 export const userService = {
     getLoggedinUser,
-    signup
+    signup,
+    logout,
+    transferFunds,
+    getTransactions,
 }
 
 async function signup(username) {
-    const users = utilService.loadFromStorage(STORAGE_KEY)
+    const users = utilService.loadFromStorage(STORAGE_KEY) || []
     const user = users.find(user => user.username === username)
     if (user) _setLoggedinUser(user)
     else {
@@ -22,14 +25,38 @@ async function signup(username) {
     }
 }
 
+function logout() {
+    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN)
+}
+
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
 }
 
+async function transferFunds(contactId, contactName, amount) {
+    const transaction = { toId: contactId, to: contactName, at: Date.now(), amount }
+    const user = getLoggedinUser()
+    if (user) {
+        user.transactions = [transaction, ...user.transactions]
+        user.balance -= amount
+        await storageService.put('user_db', user)
+        _setLoggedinUser(user)
+        const contacts = await storageService.query('contacts_db')
+        const contact = contacts.find(contact => contact._id === contactId)
+        if (contact) {
+            if (!contact.balance) contact.balance = 0
+            contact.balance += amount
+            await storageService.put('contacts_db', contact)
+        }
+    }
+}
+
+function getTransactions() {
+
+}
+
 function _setLoggedinUser(user) {
-    // const userToSave = { _id: user._id, fullname: user.fullname, score: user.score }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(user))
-    // return userToSave
 }
 
 function _createUserDB() {

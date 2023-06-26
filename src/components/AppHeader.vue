@@ -15,7 +15,7 @@
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/contacts">Contacts</RouterLink>
         <RouterLink to="/statistics">Statistics</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink v-if="user" to="/signup" @click="logout">Logout</RouterLink>
       </nav>
     </div>
   </header>
@@ -23,6 +23,7 @@
 
 <script>
 import { bitcoinService } from '@/services/bitcoin.service.js'
+import { userService } from '../services/user.service'
 export default {
   data() {
     return {
@@ -30,10 +31,16 @@ export default {
     }
   },
   computed: {
-    user() { return this.$store.getters.getUser }
+    user() { return this.$store.getters.getUser },
   },
   async created() {
     this.rate = await bitcoinService.getRate()
+  },
+  methods: {
+    logout() {
+      userService.logout()
+      this.$store.dispatch({ type: 'loadLoggedinUser' })
+    },
   }
 
 }
