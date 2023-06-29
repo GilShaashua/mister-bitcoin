@@ -11,6 +11,11 @@ button {
     }
 }
 
+input {
+    padding-inline: .8em;
+    padding-block: .5em;
+}
+
 form>* {
     display: block;
     width: 200px;

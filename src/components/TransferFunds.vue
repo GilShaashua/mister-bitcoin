@@ -10,6 +10,8 @@
 
 <script>
 import { userService } from '@/services/user.service.js'
+import { showErrorMsg } from '@/services/eventBus.service.js'
+import { showSuccessMsg } from '@/services/eventBus.service.js'
 export default {
     props: {
         contactId: { type: String, required: true },
@@ -20,10 +22,25 @@ export default {
             amount: ''
         }
     },
+    computed: {
+        user() { return this.$store.getters.getUser }
+    },
     methods: {
-        onTransfer() {
-            userService.transferFunds(this.contactId, this.contactName, this.amount)
-            this.$store.dispatch({ type: 'loadLoggedinUser' })
+        async onTransfer() {
+            if (!this.user) {
+                this.amount = ''
+                return showErrorMsg('Please login!')
+            }
+            try {
+                await userService.transferFunds(this.contactId, this.contactName, this.amount)
+                this.$store.dispatch({ type: 'loadLoggedinUser' })
+                this.amount = ''
+                showSuccessMsg('Transfered successfully!')
+            } catch (err) {
+                console.log('Error', err)
+                this.amount = ''
+                showErrorMsg('Cannot transfer!')
+            }
         }
     }
 }

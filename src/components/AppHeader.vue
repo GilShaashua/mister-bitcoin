@@ -1,8 +1,9 @@
 <template>
   <header class="app-header full main-layout">
     <div class="app-header-inner-container flex space-between align-center">
-      <div class="logo">
-        <h1>misterBitcoin</h1>
+      <div class="logo flex align-center justify-center">
+        <span>&#8383</span>
+        <h1> misterBitcoin</h1>
       </div>
       <div class="user-details" v-if="user">
         <h3>Hello {{ user.username }}</h3>

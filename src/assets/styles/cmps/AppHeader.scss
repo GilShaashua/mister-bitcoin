@@ -6,8 +6,15 @@
     .app-header-inner-container {
 
         .logo {
+            column-gap: .3em;
+
+            span {
+                font-size: em(30px);
+            }
+
             h1 {
                 font-size: em(20px);
+                margin-block-end: .2em;
             }
         }
 

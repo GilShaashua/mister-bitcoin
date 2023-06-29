@@ -1,6 +1,7 @@
 <template>
   <section class="contacts-index-container">
     <ContactsFilter @filter="onSetFilterBy" />
+    <h1 class="flex justify-center" v-if="!contacts">Loading ...</h1>
     <ContactsList @remove="removeContact" v-if="contacts" :contacts="contacts" />
   </section>
 </template>

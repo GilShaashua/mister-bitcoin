@@ -3,7 +3,7 @@
         <h2>My last transactions</h2>
         <ul>
             <li v-for="transaction in transactions.slice(0, 3)" :key="transaction._id">
-                <p>Amount {{ transaction.amount }}&#8383;</p>
+                <p>You transfered {{ transaction.amount }}&#8383;</p>
                 <p>To {{ transaction.to }}</p>
                 <p>At {{ date(transaction.at) }}</p>
             </li>

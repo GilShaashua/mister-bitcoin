@@ -11,7 +11,6 @@ export const userService = {
     signup,
     logout,
     transferFunds,
-    getTransactions,
 }
 
 async function signup(username) {
@@ -37,6 +36,7 @@ async function transferFunds(contactId, contactName, amount) {
     const transaction = { toId: contactId, to: contactName, at: Date.now(), amount }
     const user = getLoggedinUser()
     if (user) {
+        if (user.balance <= 0) throw Error
         user.transactions = [transaction, ...user.transactions]
         user.balance -= amount
         await storageService.put('user_db', user)
@@ -49,10 +49,6 @@ async function transferFunds(contactId, contactName, amount) {
             await storageService.put('contacts_db', contact)
         }
     }
-}
-
-function getTransactions() {
-
 }
 
 function _setLoggedinUser(user) {
